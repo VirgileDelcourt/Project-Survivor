@@ -5,8 +5,8 @@ from Enemy import Enemy
 
 
 class Projectile(Display):
-    def __init__(self, coord, target, duration, speed, pierce, power):
-        super().__init__("Images/pip.png", coord)
+    def __init__(self, coord, target, duration, speed, pierce, power, image="Images/pip.png"):
+        super().__init__(image, coord)
         self.movement = pygame.Vector2(target) - pygame.Vector2(coord)
         self.movement.normalize_ip()
 
@@ -22,7 +22,8 @@ class Projectile(Display):
         i = 0
         while i < len(Enemy.Enemies) and self.pierce > 0:
             opp = Enemy.Enemies[i]
-            if (self.coord - opp.coord).magnitude() < self.surf.get_size()[0]:
+            size = (self.surf.get_size()[0] + self.surf.get_size()[1]) / 2
+            if (self.coord - opp.coord).magnitude() < size:
                 Enemy.Enemies[i].Damage(self.power)
                 self.pierce -= 1
             else:

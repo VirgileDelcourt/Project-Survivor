@@ -8,7 +8,7 @@ from Entity import Entity
 class Player(Display, Entity):
     Instance = None
 
-    def __init__(self, image="Images/pap.png"):
+    def __init__(self, image, weapon):
         Display.__init__(self, image, (0, 0))
         Entity.__init__(self, 10, 0, 0, 1)
         x, y = pygame.display.get_surface().get_size()
@@ -16,6 +16,7 @@ class Player(Display, Entity):
         y = y / 2
         self.origin = x, y
 
+        self.weapons = [weapon]
         self.invincible = 1
 
         Player.Instance = self
